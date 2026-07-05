@@ -1,5 +1,6 @@
 package com.lanitoman.salestracker;
 
+import com.lanitoman.salestracker.sales.SalesService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,5 +10,5 @@ public class SalesTrackerApplication {
     public static void main(String[] args) {
         SpringApplication.run(SalesTrackerApplication.class, args);
     }
-
+    // Test
 }
