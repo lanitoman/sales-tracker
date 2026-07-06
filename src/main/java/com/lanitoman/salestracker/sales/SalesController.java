@@ -30,14 +30,31 @@ public class SalesController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Sales> getSalesById(@PathVariable UUID id){
+    public Sales getSalesById(@PathVariable UUID id){
         return salesService.getSalesById(id);
     }
 
     @PostMapping
     public ResponseEntity<Sales> addSales(@RequestBody Sales sales){
-        Sales createdSales = salesService.addSales(sales);
+        Sales createdSales = salesService.addSalesWithLine(sales);
         return new ResponseEntity<>(createdSales, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Sales> updateSales(@PathVariable UUID id, @RequestBody Sales sales){
+        return ResponseEntity.ok(salesService.updateSales(id, sales));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Sales> deleteSales(@PathVariable UUID id){
+        salesService.deleteSales(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/all")
+    public ResponseEntity<Void> deleteAllSales(){
+        salesService.deleteAllSales();
+        return ResponseEntity.noContent().build();
     }
 
 

@@ -1,6 +1,7 @@
 package com.lanitoman.salestracker.sales;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import java.time.LocalDate;
@@ -15,7 +16,8 @@ public class Sales {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false)
+    @Column(name = "invoice_id", nullable = false)
+
     private UUID id;
 
     @Column(name="reference", unique=true)
@@ -31,6 +33,7 @@ public class Sales {
     private LocalDate issueDate;
 
     @OneToMany(mappedBy = "salesInvoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<SalesInvoiceLine> lines = new ArrayList<>();
 
 

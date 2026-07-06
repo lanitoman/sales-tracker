@@ -1,5 +1,7 @@
 package com.lanitoman.salestracker.sales;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -8,11 +10,13 @@ import java.util.UUID;
 public class SalesInvoiceLine {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "invoice_id")
+    @JoinColumn(name = "invoice_id", nullable = false)
+    @JsonBackReference
     private Sales salesInvoice;
 
     @Column(name = "item")
@@ -22,7 +26,7 @@ public class SalesInvoiceLine {
     private Integer qty;
 
     @Column(name = "unitCost")
-    private Integer unitCOst;
+    private Integer unitCost;
 
     public SalesInvoiceLine(){
 
@@ -33,7 +37,7 @@ public class SalesInvoiceLine {
         this.itemName = itemName;
         this.qty = qty;
         this.salesInvoice = salesInvoice;
-        this.unitCOst = unitCOst;
+        this.unitCost = unitCOst;
     }
 
     public UUID getId() {
@@ -69,10 +73,10 @@ public class SalesInvoiceLine {
     }
 
     public Integer getUnitCOst() {
-        return unitCOst;
+        return unitCost;
     }
 
     public void setUnitCOst(Integer unitCOst) {
-        this.unitCOst = unitCOst;
+        this.unitCost = unitCost;
     }
 }
