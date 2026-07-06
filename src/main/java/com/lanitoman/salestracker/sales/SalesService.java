@@ -1,21 +1,24 @@
 package com.lanitoman.salestracker.sales;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component
+@Service
+@Transactional
 public class SalesService {
 
-    private final SalesRepository salesRepository;
+    @Autowired
+    private SalesRepository salesRepository;
 
     @Autowired
-    public SalesService(SalesRepository salesRepository){
-        this.salesRepository = salesRepository;
-    }
+    private SalesInvoiceLineRepository lineRepository;
+
 
     public List<Sales> getSales(){
         return salesRepository.findAll();

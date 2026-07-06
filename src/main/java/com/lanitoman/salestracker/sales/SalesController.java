@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/sales")
@@ -24,13 +25,13 @@ public class SalesController {
 
 
     @GetMapping
-    public List<Sales> getSales(@RequestParam(required = false) Integer Ref){
+    public List<Sales> getSales(@RequestParam(required = false) UUID id){
         return salesService.getSales();
     }
 
-    @GetMapping("/{ref}")
-    public Optional<Sales> getSalesById(@PathVariable Integer ref){
-        return salesService.getSalesById(ref);
+    @GetMapping("/{id}")
+    public Optional<Sales> getSalesById(@PathVariable UUID id){
+        return salesService.getSalesById(id);
     }
 
     @PostMapping
