@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class SalesService {
@@ -20,14 +21,17 @@ public class SalesService {
         return salesRepository.findAll();
     }
 
-    public Optional<Sales> getSalesById(Integer ref){
-        return salesRepository.findById(ref);
+
+    public Optional<Sales> getSalesById(UUID Id){
+        return salesRepository.findById(Id);
     }
+
 
     public Sales addSales(Sales sales){
         salesRepository.save(sales);
         return sales;
     }
+
 
 
 

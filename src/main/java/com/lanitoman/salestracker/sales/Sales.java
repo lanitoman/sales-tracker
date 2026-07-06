@@ -1,21 +1,35 @@
 package com.lanitoman.salestracker.sales;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name="sales_invoices")
 public class Sales {
 
-
-    private String description;
-
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
     @Column(name="reference", unique=true)
     private Integer ref;
+
+    @Column(name="description")
+    private String description;
+
+    @Column(name="customer")
+    private String customer;
+
+    @Column(name="issueDate")
+    private LocalDate issueDate;
+
+    @OneToMany(mappedBy = "salesInvoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SalesInvoiceLine> lines = new ArrayList<>();
 
 
     public Sales(){
